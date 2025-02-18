@@ -1,4 +1,4 @@
-# Analysis-II
+# Shun's Analysis II Notes
 Some of Shun's (Real) Analysis II Notes during the Spring 2025 Semester and perhaps even some exercises he does.
 
 I plan to upload my biweekly notes for Analysis II during Spring 2025, which will focus more on Integrals and Sequences and Series.
