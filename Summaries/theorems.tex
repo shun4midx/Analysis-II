@@ -1,0 +1,130 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[dvipsnames,usenames]{xcolor}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\newgeometry{top=2cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{cleveref}
+\usepackage{mdframed}
+\usepackage{times}
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\renewcommand\thetheorem{\arabic{subsection}.\arabic{theorem}}
+\renewcommand\thelemma{\arabic{subsection}.\arabic{lemma}}
+\renewcommand\theproposition{\arabic{subsection}.\arabic{proposition}}
+\renewcommand\thecorollary{\arabic{subsection}.\arabic{corollary}}
+\renewcommand\theremark{\arabic{subsection}.\arabic{remark}}
+\lhead{Analysis II Theorems}
+\rhead{Shun (@shun4midx)}
+\pagestyle{fancy}
+
+\begin{document}
+\begin{center}
+  {\Large \bf Analysis II Theorems}\\[6pt]
+  \text{By Shun (@shun4midx)}
+\end{center}
+
+\section*{Statements}
+\begin{mdframed}
+\textbf{Notice:} I have briefly mentioned this in my README.md document, but by ``Theorems'', I refer to not just Theorems, but also Lemmas, Propositions, Corollaries and other things of the sort.
+\end{mdframed}
+
+\refstepcounter{subsection}
+\setcounter{subsection}{1}
+\setcounter{theorem}{0}
+\setcounter{lemma}{0}
+\setcounter{proposition}{0}
+\setcounter{corollary}{0}
+\subsection*{\underline{\textbf{2-18-25 (Week 1): Riemann-Stieltjes Integrals (Functions of Bounded Variation)}}}
+\begin{proposition}
+    Let $f: [a, b] \rightarrow \mathbb{R}$ be a \textbf{monotonic function}. Then, the set of its \textbf{discontinuities} $D$ is a \textbf{countable} set.
+\end{proposition}
+
+\begin{remark}
+  For any $P = (x_k)_{0 \leq k \leq n} \in \mathcal{P}([a, b])$, we have $b - a = \sum_{k = 1}^{n} \Delta x_k$.
+\end{remark}
+
+\begin{proposition}
+  Let $f \in \mathcal{BV}([a, b], \mathbb{R})$, then
+  \begin{enumerate} [(1)]
+    \item For any partitions $P \subseteq P'$, we have \underline{$V_P(f) \leq V_{P'}(f)$}
+    \item $\forall \ \varepsilon > 0$, $\exists$ partition $P_\varepsilon \in \mathcal{P}([a, b])$, s.t. $\forall$ \textbf{finer partition} $P \supseteq P_\varepsilon$, we have \underline{$V_P(f) \leq V_f \leq V_P(f) + \varepsilon$}
+  \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+  If $f: [a, b] \rightarrow \mathbb{R}$ is \textbf{monotonic}, then \underline{$f \in \mathcal{BV}([a, b])$} and \underline{$V_f = |f(b) - f(a)|$}
+\end{proposition}
+
+\begin{proposition}
+  If $f: [a, b] \rightarrow \mathbb{R}$ is \textbf{continuous} and \textbf{differentiable} on $(a, b)$ with \textbf{bounded derivative}, then \underline{$f \in \mathcal{BV}([a, b])$}.
+\end{proposition}
+
+\newpage
+
+\section*{Statements and Proof Outlines}
+\begin{mdframed}
+\textbf{Notice:} I would give enough detail but not write my proofs formally here. They are proof \textbf{outlines} so it is easier to recall \textbf{for me}, not actual proofs nor in complete English. It may look messy to you, that's understandable. I have a certain chronic eye condition and am dyslexic, so I need such ``messiness'' to understand what I write. When I can't color-code stuff like in  my notes, this is the best alternative.
+\end{mdframed}
+
+\refstepcounter{subsection}
+\setcounter{subsection}{1}
+\setcounter{theorem}{0}
+\setcounter{lemma}{0}
+\setcounter{proposition}{0}
+\setcounter{corollary}{0}
+\subsection*{\underline{\textbf{2-18-25 (Week 1): Riemann-Stieltjes Integrals (Functions of Bounded Variation)}}}
+\begin{proposition}
+    Let $f: [a, b] \rightarrow \mathbb{R}$ be a \textbf{monotonic function}. Then, the set of its \textbf{discontinuities} $D$ is a \textbf{countable} set.
+
+  \begin{proof}
+    $D := \{x \in I\ |\ f(x-) \neq f(x+)\}$. WLOG, assume $f$ incr $\Rightarrow f(x-) \lneq f(x+)\ \forall x \in D$.
+    $\mathbb{Q}$ dense in $\mathbb{R}$ $\Rightarrow \exists\ q_x \in \mathbb{Q} \cap (f(x-), f(x+))$. 
+    $\therefore$ $\exists$ map $D \rightarrow \mathbb{Q},\ x \mapsto q_x$, \textbf{inj} cuz $\forall x_1, x_2 \in D,$ \underline{$x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$}. 
+    $\because D$ \textbf{inj} in \textbf{countable} $\mathbb{Q}$ $\therefore D$ is \textbf{countable}.
+  \end{proof}
+\end{proposition}
+\vspace{0.125em}
+
+\begin{proposition}
+  Let $f \in \mathcal{BV}([a, b], \mathbb{R})$, then
+  \begin{enumerate} [(1)]
+    \item For any partitions $P \subseteq P'$, we have \underline{$V_P(f) \leq V_{P'}(f)$}
+    \item $\forall \ \varepsilon > 0$, $\exists$ partition $P_\varepsilon \in \mathcal{P}([a, b])$, s.t. $\forall$ \textbf{finer partition} $P \supseteq P_\varepsilon$, we have \underline{$V_P(f) \leq V_f \leq V_P(f) + \varepsilon$}
+  \end{enumerate}
+
+  \noindent\textit{Proof.}
+  \begin{enumerate} [(1)]
+    \item By MI, only need to prove when $|\text{Supp}(P')| = |\text{Supp}(P)| + 1$. Let $P, P, k$ s.t. $\text{Supp}(P') = \text{Supp}(P) \cup \{c\}$, $x_{k - 1} < c < x_k$.
+    Then, by $\triangle$ ineq, $V_{P'}(f) = \sum_{k = 1, k \neq i}^{n} |f(x_k) - f(x_{k - 1})| + |f(c) - f(x_{i - 1})| + |f(x_i) - f(c)| \geq \sum_{k = 1}^{n}|f(x_k) - f(x_{k - 1})| = V_P(f)$. Now by MI, done.
+    \item By def, $V_f = \sup_{P \in \mathcal{P}([a, b])} V_P(f) \Rightarrow \forall\ \varepsilon > 0, \ \exists\ P_\varepsilon \in \mathcal{P}([a, b])$, s.t. $V_f \leq V_{P_\varepsilon}(f) + \varepsilon$. $\therefore \forall P \supseteq P_\varepsilon$, by (1), \underline{$V_f \leq V_{P_\varepsilon}(f) + \varepsilon \leq V_P(f) + \varepsilon$} \qed
+  \end{enumerate}
+\end{proposition}
+\vspace{0.125em}
+
+\begin{proposition}
+  If $f: [a, b] \rightarrow \mathbb{R}$ is \textbf{monotonic}, then \underline{$f \in \mathcal{BV}([a, b])$} and \underline{$V_f = |f(b) - f(a)|$}
+
+  \begin{proof}
+    WLOG, assume $f$ incr $\Rightarrow \forall \ P \in \mathcal{P}([a, b]), \ V_P(f) = \sum_{k = 1}^{n} |\Delta f_k| = \sum_{k = 1}^{n} \Delta f_k = f(b) - f(a)$, which is \textbf{indep} of P. $\therefore f \in \mathcal{BV}([a, b]),\ V_f = |f(b) - f(a)|$
+  \end{proof}
+\end{proposition}
+\vspace{0.125em}
+
+\begin{proposition}
+  If $f: [a, b] \rightarrow \mathbb{R}$ is \textbf{continuous} and \textbf{differentiable} on $(a, b)$ with \textbf{bounded derivative}, then \underline{$f \in \mathcal{BV}([a, b])$}.
+
+  \begin{proof}
+    Let $P = (x_k)_{0 \leq k \leq n}$, then by MVT, \newline$V_P(f) = \sum_{k = 1}^{n} |\Delta f_k| = \sum_{k = 1}^{n} |f'(t_k)| \Delta x_k \leq \sup_{t \in [a, b]} |f'(t)| \sum_{k = 1}^{n} \Delta x_k = \sup_{t \in [a, b]} |f'(t)|| (b - a)$
+  \end{proof}
+\end{proposition}
+\vspace{0.125em}
+
+\end{document}

@@ -1,0 +1,67 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[dvipsnames,usenames]{xcolor}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\newgeometry{top=2cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{cleveref}
+\usepackage{mdframed}
+\usepackage{times}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[subsection]
+\renewcommand\thedefinition{\arabic{subsection}.\arabic{definition}}
+\lhead{Analysis II Definitions}
+\rhead{Shun (@shun4midx)}
+\pagestyle{fancy}
+
+\begin{document}
+\begin{center}
+  {\Large \bf Analysis II Definitions}\\[6pt]
+  \text{By Shun (@shun4midx)}
+\end{center}
+
+\section*{Definitions}
+\refstepcounter{subsection}
+\setcounter{definition}{0}
+\subsection*{\underline{\textbf{2-18-25 (Week 1): Riemann-Stieltjes Integrals (Functions of Bounded Variation)}}}
+\begin{definition}
+  Let $I \subseteq \mathbb{R}$ be an interval, $f: I \rightarrow \mathbb{R}$ be a function.
+  \begin{enumerate} [(1)]
+    \item $f$ is \textbf{non-increasing/decreasing} if $f(x) > f(y) \ \forall x \leq y, \ x, y \in I$
+    \item $f$ is \textbf{non-decreasing/increasing} if $f(x) < f(y) \ \forall x \leq y, \ x, y \in I$
+    \item $f$ is \textbf{monotonic} if (1) or (2) holds
+  \end{enumerate}
+\end{definition}
+\vspace{0.125em}
+
+\begin{definition}
+  Let $f: I \rightarrow \mathbb{R}$ be monotonic.
+  For $x \in I$, define:
+  \begin{itemize}
+    \item The \textbf{left limit} at x to be \underline{$f(x-) = \lim_{y < x, \ y \rightarrow x} f(y)$} if $(x - \varepsilon, x) \cap I \neq \emptyset$ for $\varepsilon > 0$ \textit{(e.g. we cannot just pick a point at the boundary)}
+    \item The \textbf{right limit} at x to be \underline{$f(x+) = \lim_{y > x, \ y \rightarrow x} f(y)$} if $(x, x + \varepsilon) \cap I \neq \emptyset$ for $\varepsilon > 0$
+  \end{itemize}
+\end{definition}
+\vspace{0.125em}
+
+\begin{definition}
+  Let $a < b$ and $[a, b] \in \mathbb{R}$ be a \underline{segment}.
+  \begin{itemize}
+    \item A \textbf{partition} or a \textbf{subdivision} of $[a, b]$ is a finite sequence $P = (x_k)_{0 \leq k \leq n}$ s.t. $a = x_0 < x_1 < \dots < x_n = b$, where $n$ is the \textbf{length} of $P$. We denote \underline{$\text{Supp}(P):=\{x_k\ |\ 0 \leq k \leq n\}$} as the \textbf{support} of $P$.
+    \item For a \underline{finite subset} $A \subseteq [a, b]$ with $a, b \in A$, we may find a partition $P$ of $[a, b]$ s.t. Supp$(P) = A$. This is called the \textbf{partition corresponding to $A$}.
+    \item We say $[x_{k -  1}, x_k]$ is the $k^{\text{th}}$ \textbf{subinterval} of $P$, \underline{$\Delta x_k := x_k - x_{k - 1}$}, $1 \leq k \leq n$. Then, we say the \textbf{mesh size} of $P$ is \underline{$||P|| := \max_{1 \leq k \leq n} \Delta x_k$}
+    \item Let $P$, $P'$ be partitions. If $\text{Supp}(P) \subseteq \text{Supp}(P')$, then we say $P'$ is \textbf{finer} than $P$, and we say \underline{$P \subseteq P'$}. This also implies \underline{$||P|| \leq ||P'||$}.
+    \item Let $P_1$, $P_2$ be partitions. Define their \textbf{joint partition} or \textbf{smallest comon refinement} to be \underline{$P := P_1 \vee P_2$}, which is the partition $P$ with support = \underline{$\text{Supp}(P_1) \cup \text{Supp}(P_2)$}.
+    \item We denote \underline{$\mathcal{P}([a, b])$} as the collection of \textbf{all} possible partitions of $[a, b]$.
+  \end{itemize}
+\end{definition}
+\vspace{0.125em}
+
+\begin{definition}
+  Let $f: [a, b] \rightarrow \mathbb{R}$ be a function, $P = (x_k)_{0 \leq k \leq n} \in \mathcal{P}([a, b])$, define \underline{$\Delta f_k := f(x_k) - f(x_{k - 1})$} for $1 \leq k \leq n$. Define \underline{$V_P(f) := \sum_{k = 1}^{n} |\Delta f_k|$} and \underline{$V_f = V_f([a, b]) = \sup_{P \in \mathcal{P}([a, b])} V_P(f)$} $\in [0, \infty]$ to be the \textbf{total variation} of $f$. We say that $f$ is of \textbf{bounded variation} if $V_P < +\infty$. We write $\underline{\mathcal{BV}([a, b]) = \mathcal{BV}([a, b], \mathbb{R})}$ for the collection of such functions defined on $[a, b]$.
+\end{definition}
+\vspace{0.125em}
+\end{document}
