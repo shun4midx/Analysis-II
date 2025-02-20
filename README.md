@@ -5,4 +5,4 @@ I plan to upload my biweekly notes for Analysis II during Spring 2025, which wil
 
 I like to take notes by hand using GoodNotes, because I find it most natural and pretty this way. Since it is my own preference, I would not upload a LaTeX file equivalent for my notes, it should be enjoyed as is.
 
-I will also create LaTeX files (and their PDFs) under the Summaries folder, it is just a compilation of all definitions and theorems over the course of all the notes I upload. I do not consider them my notes though, although they technically are my notes too. In fact, they are literally just copies of my notes. The files `theorems.tex` and `theorems.pdf` contain lemmas, propositions, remarks, and colloraries too, not just theorems.
+I will also create LaTeX files (and their PDFs) under the Summaries folder, it is just a compilation of all definitions and theorems over the course of all the notes I upload. I do not consider them my notes though, although they technically are my notes too. In fact, they are literally just copies of my notes. The files `theorems.tex` and `theorems.pdf` contain lemmas, propositions, remarks, and corollaries too, not just theorems.
