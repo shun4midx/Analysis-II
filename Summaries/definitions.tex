@@ -10,9 +10,26 @@
 \usepackage{cleveref}
 \usepackage{mdframed}
 \usepackage{times}
+\usepackage{bbm}
+\usepackage{stackengine}
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[subsection]
-\renewcommand\thedefinition{\arabic{subsection}.\arabic{definition}}
+\newtheorem{defin}{Definition}[subsection]
+\newtheorem{ex}{Example}[subsection]
+\renewcommand\thedefin{\arabic{subsection}.\arabic{defin}}
+\renewcommand\theex{\arabic{subsection}.\arabic{ex}}
+\newenvironment{definition}{
+  \begin{defin}
+}{
+  \end{defin}
+  \vspace{0.125em}
+}
+
+\newenvironment{example}{
+  \begin{ex}
+}{%
+  \end{ex}
+  \vspace{0.125em}
+}
 \lhead{Analysis II Definitions}
 \rhead{Shun (@shun4midx)}
 \pagestyle{fancy}
@@ -25,7 +42,8 @@
 
 \section*{Definitions}
 \refstepcounter{subsection}
-\setcounter{definition}{0}
+\setcounter{defin}{0}
+\setcounter{ex}{0}
 \subsection*{\underline{\textbf{2-18-25 (Week 1): Riemann-Stieltjes Integrals (Functions of Bounded Variation)}}}
 \begin{definition}
   Let $I \subseteq \mathbb{R}$ be an interval, $f: I \rightarrow \mathbb{R}$ be a function.
@@ -35,7 +53,6 @@
     \item $f$ is \textbf{monotonic} if (1) or (2) holds
   \end{enumerate}
 \end{definition}
-\vspace{0.125em}
 
 \begin{definition}
   Let $f: I \rightarrow \mathbb{R}$ be monotonic.
@@ -45,7 +62,6 @@
     \item The \textbf{right limit} at x to be \underline{$f(x+) = \lim_{y > x, \ y \rightarrow x} f(y)$} if $(x, x + \varepsilon) \cap I \neq \emptyset$ for $\varepsilon > 0$
   \end{itemize}
 \end{definition}
-\vspace{0.125em}
 
 \begin{definition}
   Let $a < b$ and $[a, b] \in \mathbb{R}$ be a \underline{segment}.
@@ -58,10 +74,156 @@
     \item We denote \underline{$\mathcal{P}([a, b])$} as the collection of \textbf{all} possible partitions of $[a, b]$.
   \end{itemize}
 \end{definition}
-\vspace{0.125em}
 
 \begin{definition}
   Let $f: [a, b] \rightarrow \mathbb{R}$ be a function, $P = (x_k)_{0 \leq k \leq n} \in \mathcal{P}([a, b])$, define \underline{$\Delta f_k := f(x_k) - f(x_{k - 1})$} for $1 \leq k \leq n$. Define \underline{$V_P(f) := \sum_{k = 1}^{n} |\Delta f_k|$} and \underline{$V_f = V_f([a, b]) = \sup_{P \in \mathcal{P}([a, b])} V_P(f)$} $\in [0, \infty]$ to be the \textbf{total variation} of $f$. We say that $f$ is of \textbf{bounded variation} if $V_P < +\infty$. We write $\underline{\mathcal{BV}([a, b]) = \mathcal{BV}([a, b], \mathbb{R})}$ for the collection of such functions defined on $[a, b]$.
 \end{definition}
-\vspace{0.125em}
+
+\refstepcounter{subsection}
+\setcounter{defin}{0}
+\setcounter{ex}{0}
+\subsection*{\underline{\textbf{2-20-25 (Week 1): Properties of Bounded Variation}}}
+\begin{definition}
+  Let $f \in \mathcal{BV}$. Define its \textbf{variation function} to be \raisebox{-1.33em}{$\begin{aligned} V:\ [a, b] &\longrightarrow \mathbb{R} \\ x &\longmapsto \left\{ \begin{array}{ll} 0 &\text{if $x = a$} \\ V_f([a, b]) \quad &\text{if $x \in (a, b]$} \end{array} \right. \end{aligned}$}
+\end{definition}
+
+\refstepcounter{subsection}
+\setcounter{defin}{0}
+\setcounter{ex}{0}
+\subsection*{\underline{\textbf{2-25-25 (Week 2): Riemann-Stieltjes Integrals}}}
+\begin{definition}
+  Let $P = (x_k)_{0 \leq k \leq n} \in \mathcal{P}([a, b])$. For every $1 \leq k \leq n$, take $t_k \in [x_{k - 1}, x_k]$ and write $t = (t_k)_{0 \leq k \leq n}$. We call $(P, t)$ a \textbf{tagged partition}, where $t$ contains \textbf{tagged points} of $P$. \newline
+
+  \noindent Then, the \textbf{R-S sum} of $f$ w.r.t. $\alpha$ for $(P, t)$, is \underline{$S_{P, t}(f, \alpha) = \sum_{k = 1}^n f(t_k) \Delta \alpha_k = \sum_{k = 1}^n f(t_k)[\alpha(x_k) - \alpha(x_{k- 1})]$}. \textit{(Notice that $t$ is used for $f$ and $x$ is used for $\alpha$)}.
+\end{definition}
+
+\begin{definition}
+  The \textbf{(RS) condition} is when $\exists L \in \mathbb{R}$, s.t. $\forall \varepsilon > 0,\ \exists \mathcal{P}_\varepsilon \in \mathcal{P}([a, b])$, s.t. $\forall P \supseteq \mathcal{P}_\varepsilon$, \textbf{tagged points} $t$ of $P$, we have \underline{$|S_{P, t} (f, \alpha) - L| < \varepsilon$}. If \textbf{(RS)} holds, we say $f$ is \textbf{R-S integrable}, and define the unique $L$ to be its \textbf{integral}, \underline{$\int_a^b f d \alpha = \int_a^b f(x) d\alpha(x)$.}
+\end{definition}
+
+\begin{definition}
+  We write \underline{$R(\alpha; a, b) = R(\alpha)$} for the set of \textbf{functions} $f$ satisfying \textbf{(RS)}.
+\end{definition}
+
+\begin{example}
+  \underline{\textbf{KEY CONSTRUCTION EXAMPLE.}} \textit{(What if $f$ and $\alpha$ share the \textbf{same discontinuities})} \newline
+  \noindent Let $f, \alpha: [-1, 1] \to \mathbb{R}$ to be $\boxed{f = \alpha = \mathbbm{1}_{x \geq 0}}$ . Consider a partition $P \in \mathcal{P}([-1, 1])$ with \underline{$x_k = 0$} for some $k$. $\forall$ tagged points $t$ of $P$, \underline{$S_{P, t}(f, \alpha) = f(t_k) \Delta \alpha_k = f(t_k) = \boxed{\mathbbm{1}_{t_k = x_k = 0}}$}. Hence, \boxed{\textbf{(RS) does not hold}}
+\end{example}
+
+\begin{definition}
+  The \textbf{(RS') condition} is when $\exists L \in \mathbb{R}$, s.t. $\forall \varepsilon > 0,\ \exists \delta > 0$, s.t. $\forall P \in \mathcal{P}([a, b])$ with \underline{$\max_{1 \leq k \leq n} |x_k - x_{k - 1}| = ||P|| < \delta$}, any tagged points $t$, we have \underline{$|S_{P, t}(f, \alpha) - L| < \varepsilon$}. By def, \textbf{(RS') $\Rightarrow$ (RS)}.
+\end{definition}
+
+\begin{example}
+  Let $f = \mathbbm{1}_{x > 0}$, $\alpha = \mathbbm{1}_{x \geq 0}$, $\delta \in (0, 1)$ and $P \in \mathcal{P}([0, 1])$, s.t. $||P|| < \delta$, then $\exists\ k$, s.t. \underline{$x_{k - 1} =  -\frac{\delta}{2},\ x_k = \frac{\delta}{2}$}. Then, $S_{P, t} (f, \alpha) = f(t_k)[\alpha(x_k) - \alpha(x_{k - 1})] = f(t_k) = \boxed{\mathbbm{1}_{t_k > 0}}$, which \textbf{depends on tagged points}. Here we have \boxed{\textbf{(RS) but not (RS')}}
+\end{example}
+
+\begin{definition}
+  For $a < b$, any bounded $\alpha: [a, b] \to \mathbbm{R}$, $f \in R(\alpha; a, b)$, we define \underline{$\int_b^a f d \alpha = -\int_a^b f d \alpha$}. We also write \underline{$R(\alpha; a, b) = R(\alpha; b, a)$}. \textit{(This is for our convenience in future theorems)}
+\end{definition}
+
+\refstepcounter{subsection}
+\setcounter{defin}{0}
+\setcounter{ex}{0}
+\subsection*{\underline{\textbf{2-27-25 (Week 2): Step Function Integrators}}}
+\begin{definition}
+  Given $\alpha: [a, b] \to \mathbb{R}$, it is a \textbf{step function} if $\exists P \in \mathcal{P}([a, b])$, s.t. \underline{$f|_{[x_{k - 1}, x_k]}$} is \textbf{constant} for $1 \leq k \leq n$. We define the \textbf{jump} at $x_k$ to be \underline{$\alpha_k := \alpha(x_k^+) - \alpha(x_k^-)$}, with $\alpha_0 := \alpha(x_0^+) - \alpha(x_0)$ and $\alpha_n := \alpha(x_n) - \alpha(x_n^-)$.
+\end{definition}
+
+\refstepcounter{subsection}
+\setcounter{defin}{0}
+\setcounter{ex}{0}
+\subsection*{\underline{\textbf{3-4-25 (Week 3): Darboux Summations and Riemann's Condition}}}
+\begin{definition}
+  Let $P \in \mathcal{P}([a, b])$ and define for $1 \leq k \leq n$, $M_k = M_k(f):= \sup \{f(x)\ |\ x \in [x_{k - 1}, x_k]\}$ and $m_k = m_k(f) := \inf \{f(x)\ |\ x \in [x_{k - 1}, x_k]\}$. We define the \textbf{upper and lower Darboux sums} as \underline{$U_P(f, \alpha) = \sum_{k = 1}^n M_k(f) \Delta \alpha_k$} and \underline{$L_P(f, \alpha) = \sum_{k = 1}^n m_k(f) \Delta \alpha_k$} \textit{(Note, no tagged points are needed for these defs. Also, when $\alpha(x) = x$, these are the upper and lower Riemann sums)}
+\end{definition}
+
+\begin{definition}
+  Suppose $\alpha$ is \textbf{nondecreasing}, then the \textbf{upper/lower Stieltjes integrals} of $f$ w.r.t. $\alpha$ are \underline{$\overline{I}(f, \alpha) = \overline{\int_a^b} f d \alpha := \inf \{U_P(f, \alpha)\ |\ P \in \mathcal{P}([a, b])\}$} and \underline{$\underline{I}(f, \alpha) = \underline{\int_a^b} f d \alpha := \inf \{U_P(f, \alpha)\ |\ P \in \mathcal{P}([a, b])\}$}.
+\end{definition}
+
+\begin{definition}
+  Let $\alpha: [a, b] \to \mathbb{R}$ be \textbf{nondecreasing}. We say $f$ satisfies \textbf{Riemann's condition} w.r.t. $\alpha$ on $[a, b]$ if $\forall \varepsilon > 0,\ exists\ P_\varepsilon \in \mathcal{P}([a, b])$, s.t. $\forall\ P \supset P_\varepsilon$, we have \underline{$0 \leq U_P(f, \alpha) - L_P(f, \alpha) < \varepsilon$} \textit{(Again, tagged points don't matter here)}
+\end{definition}
+
+\refstepcounter{subsection}
+\setcounter{defin}{0}
+\setcounter{ex}{0}
+\subsection*{\underline{\textbf{3-6-25 (Week 3): Riemann's Condition}}}
+\begin{example}
+  \textbf{IMPORTANT.} The \textbf{converse} of $f \in R(\alpha; a, b) \Rightarrow f^2 \in R(\alpha; a, b)$ \textbf{does not hold}. Consider over $x \in [0, 1]$, define $\boxed{f(x) = 2 \cdot \mathbbm{1}_{x \notin \mathbb{Q}} - 1}$. We have \underline{$f^2 \in R(\alpha; a, b)$ but $f \notin R(\alpha; a, b)$}.
+\end{example}
+
+\refstepcounter{subsection}
+\setcounter{defin}{0}
+\setcounter{ex}{0}
+\subsection*{\underline{\textbf{3-11-25 (Week 4): Fundamental Theorems of Calculus}}}
+\begin{definition}
+  Let $I \subseteq \mathbb{R}$ be an interval, $f,\ F: I \to \mathbb{R}$ be functions. If \underline{$F'(x) = f(x)$} $\forall x \in \text{int}(I)$ , we say F is a \textbf{primitive} or \textbf{antiderivative} of $f$.
+\end{definition}
+
+\refstepcounter{subsection}
+\setcounter{defin}{0}
+\setcounter{ex}{0}
+\subsection*{\underline{\textbf{3-13-25 (Week 4): Integrals Depending on a Parameter and Riemann Integrals}}}
+\begin{definition}
+  Let $S \subseteq \mathbb{R}$ be a subset. We say $S$ has \textbf{measure zero} if $\forall \varepsilon > 0,\ \exists$ a \textbf{countable} family $\{U_i = (a_i, b_i)\ |\ i \in I\}$ of open intervals s.t.:
+  \begin{itemize}
+    \item \underline{$S \subseteq \cup_{i \in I} (a_i, b_i)$} \textit{(``S can be covered by these open intervals'')}
+    \item The sum of lengths satisfy \underline{$\sum_{i \in I} |U_i| = \sum_{i \in I}(b_i - a_i) \leq \varepsilon$}
+  \end{itemize}
+  where \underline{$|U_i| = b_i - a_i$} denotes the \underline{length} of the open interval $U_i$ for $i \in I$.
+\end{definition}
+
+\refstepcounter{subsection}
+\setcounter{defin}{0}
+\setcounter{ex}{0}
+\subsection*{\underline{\textbf{3-25-25 (Week 6): Lesbegue's Criterion}}}
+\begin{definition}
+  Let $f: [a, b] \to \mathbb{R}$ be a \textbf{bounded} function. For any subset $A \subseteq [a, b]$, define the \textbf{oscillation} of $f$ on $A$ to be $\boxed{\Omega_f(A) := \sup\{f(x) - f(y)\ |\ x, y \in A}$. \newline
+  
+  \noindent For $x \in [a, b]$, define the \textbf{oscillation} of $f$ at $x$ to be $\boxed{\omega_f(x) := \text{lim}_{h \to 0^+} \Omega_f(B(x, h) \cap [a, b])}$. \textit{(The idea is to view the point as an infinitely small ball. Also, $\Omega_f(A)$ has actually appeared before in \textbf{Darboux sums})}
+\end{definition}
+
+\refstepcounter{subsection}
+\setcounter{defin}{0}
+\setcounter{ex}{0}
+\subsection*{\underline{\textbf{3-27-25 (Week 6): Sequences and Series}}}
+\begin{definition}
+  Let $(a_n)_{n \geq 1}$ be a \textbf{real-valued sequence}. We say it \textbf{converges} to $l \in \mathbb{R}$ if $\forall \varepsilon > 0,\ \exists N \geq 1$, s.t. \underline{$|x_0 - l| \leq \varepsilon$} $\forall n \geq N$.
+\end{definition}
+
+\begin{definition}
+  In a \textbf{complete} vector space, to check for convergence, we just need \textbf{\underline{Cauchy's Condition}}: $\forall \varepsilon > 0,\ \exists N > 0$, s.t. $\forall m, n \geq N$, \underline{$|a_m - a_n| < \varepsilon$} \textit{(Good because we don't need to know the limit $l$)}
+\end{definition}
+
+\begin{definition}
+  Let $(a_n)_{n \geq 1}$ and $(b_n)_{n \geq 1}$ be two real sequences. Here are some asymptotic notations.
+  \begin{itemize}
+    \item We say $a$ is \textbf{dominated} by $b$, denoted by $\boxed{a_n = O(b_n)}$, if $\exists$ \textbf{bounded sequence} $c = (c_n)_{n \geq 1}$ and $N \in \mathbb{N}$, s.t. \underline{$a_n = c_n b_n$} $\forall n \geq N$
+    \item We say $a$ is \textbf{negligible} compared to $b$, denoted by $\boxed{a_n = o(b_n)}$, if $\exists$ sequence $\varepsilon = (\varepsilon_n)_{n \geq 1}$ that \textbf{converges to 0} and $N \in \mathbb{N}$, s.t. \underline{$a_n = \varepsilon_n b_n$} $\forall n \geq N$
+    \item We say $a$ is \textbf{equivalent} to $b$, i.e. $\boxed{a_n \sim b_n}$, if $\exists$ sequence $c = (c_n)_{n \geq 1}$ that \textbf{converges to 1} and $N \in \mathbb{N}$, s.t. \underline{$a_n = c_n b_n$} $\forall n \geq N$
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Let $(u_n)_{n \geq 0}$ be a sequence in a \textbf{normed vector space} $(W, ||\cdot||)$
+  \begin{itemize}
+    \item Define $S_0 := 0$, $S_n = u_1 + \dots + u_n$ for $n \geq 1$. The series with general term $u_n$ is the sequence $(S_n)_{n \geq 1}$, denoted as \underline{$\sum_{n \geq 1} u_n$}. This is called the \textbf{n-th partial sum} of $\sum u_n$
+    \item We say $\sum u_n$ converges if $(S_n)_{n \geq 0}$ converges in $(W, ||\cdot||)$. We denote the limit as $\sum_{n \geq 1} u_n$
+    \item If $\sum_{n \geq 1} u_n$ \textbf{converges}, we define its \underline{\textbf{n-th remainder}} by $\boxed{R_n = \Sigma_{k = 1}^\infty u_k - \Sigma_{k = 1}^n u_k = \Sigma_{k = n + 1}^\infty u_k}$
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Given a \textbf{Banach space} $(W, ||\cdot||)$, $\sum u_n$ \textbf{converges} iff \underline{\textbf{Cauchy's Criterion}} holds, i.e. $\forall \varepsilon > 0,\ \exists N > 0$, s.t. $\forall n \geq N, \forall k \geq 1, \boxed{||u_{n + 1} + \dots + u_{n + k}|| < \varepsilon}$. \textit{(This is not the definition, this requires proof, but this is the definition of this useful criterion, so I decided to still put it here!)}
+\end{definition}
+
+\begin{definition}
+  Suppose $(W, ||\cdot||)$ is a \textbf{Banach space}, and let $\sum u_n$ be a series with general terms in $W$
+  \begin{itemize}
+    \item If \underline{$\sum ||u_n||$ converges}, we say the series $\sum u_n$ \textbf{converges absolutely} \textit{(Notice, this is conv w/o norm)}
+    \item If $\sum u_n$ converges but \textbf{not absolutely}, we say $\sum u_n$ \underline{\textbf{converges conditionally}}
+  \end{itemize}
+\end{definition}
 \end{document}
